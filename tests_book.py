@@ -31,5 +31,37 @@ class TestBooksCollector:
         # проверка добавления книги в словарь без жанра
     def test_add_new_book_correct_add_book_successful_add(self):
         collector = BooksCollector()
+        collector.add_new_book('Диалоги.')
+        assert collector.get_book_genre('Диалоги.') == ''
+   
+    # проверка добавления книги с количеством букв в названии более 40.
+    def test_add_new_book_more_forty_simbol(self):
+        collector = BooksCollector()
+        collector.add_new_book('Спасение утопающих дело рук самих утопающих.')
+        assert collector.get_books_genre() == {}
+    
+    #  проверка на успешное присвоение жанра из списка ganre.
+    def test_set_book_genre_correct_genre_success(self):
+        collector = BooksCollector()
+        collector.add_new_book('Диалоги.')
+        collector.set_book_genre('Диалоги.', 'Фантастика')
+        assert collector.books_genre['Диалоги.'] == 'Фантастика'
+
+    # проверка получения жанра книги по её имени.
+    def test_get_book_genre(self):
+        collector = BooksCollector()
+        collector.add_new_book('Диалоги.')
+        collector.set_book_genre('Диалоги.', 'Фантастика')
+        assert collector.get_book_genre('Диалоги.') == 'Фантастика'
+
+    def test_set_book_genre_incorrect_genre_unsuccess(self):
+        collector = BooksCollector()
         collector.add_new_book('Азбука')
-        assert collector.get_book_genre('Азбука') == ''
+        collector.set_book_genre('Азбука', 'FFFFFF')
+        assert collector.books_genre['Азбука'] == ''
+
+
+
+
+
+    
