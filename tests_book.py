@@ -92,6 +92,30 @@ class TestBooksCollector:
         collector.set_book_genre('Пила.', 'Ужасы')
         assert collector.get_books_for_children() == ['Сказки.']
 
+    # проверка добавления книги в избранное
+    def test_add_book_in_favorites(self):
+        collector = BooksCollector()
+        collector.add_new_book('Диалоги.')
+        collector.add_book_in_favorites('Диалоги.')
+        assert collector.get_list_of_favorites_books() == ['Диалоги.']
+
+    # проверка удаления книги из избранного.
+    def test_delete_book_from_favorites(self):
+        collector = BooksCollector()
+        collector.add_new_book('Диалоги.')
+        collector.add_book_in_favorites('Диалоги.')
+        collector.delete_book_from_favorites('Диалоги.')
+        assert collector.get_list_of_favorites_books() == []
+
+    # проверка получения списка избранных книг.
+    def test_get_list_of_favorites_books(self):
+        collector = BooksCollector()
+        collector.add_new_book('Диалоги.')
+        collector.add_new_book('Дон Кихот.')
+        collector.add_book_in_favorites('Диалоги.')
+        collector.add_book_in_favorites('Дон Кихот.')
+        assert collector.get_list_of_favorites_books() == ['Диалоги.', 'Дон Кихот.']
+
 
 
 
