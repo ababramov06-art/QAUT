@@ -83,6 +83,15 @@ class TestBooksCollector:
         collector.set_book_genre('Диалоги.', 'Фантастика')
         assert collector.get_book_genre('Диалоги.') == 'Фантастика'
 
+    # проверка получения книг, подходящих детям.
+    def test_get_booksfor_children(self):
+        collector = BooksCollector()
+        collector.add_new_book('Сказки.')
+        collector.add_new_book('Пила.')
+        collector.set_book_genre('Сказки.', 'Фантастика')
+        collector.set_book_genre('Пила.', 'Ужасы')
+        assert collector.get_books_for_children() == ['Сказки.']
+
 
 
 
