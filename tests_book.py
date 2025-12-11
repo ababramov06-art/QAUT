@@ -54,11 +54,20 @@ class TestBooksCollector:
         collector.set_book_genre('Диалоги.', 'Фантастика')
         assert collector.get_book_genre('Диалоги.') == 'Фантастика'
 
+    # проверка жанр не входящий в список не устанавливается.
     def test_set_book_genre_incorrect_genre_unsuccess(self):
         collector = BooksCollector()
-        collector.add_new_book('Азбука')
-        collector.set_book_genre('Азбука', 'FFFFFF')
-        assert collector.books_genre['Азбука'] == ''
+        collector.add_new_book('Диалоги.')
+        collector.set_book_genre('Диалоги.', 'FFFFFF')
+        assert collector.books_genre['Диалоги.'] == ''
+
+    # проверка получения книг по жанрам
+    def test_get_books_with_specific_genre(self):
+        collector = BooksCollector()
+        collector.add_new_book('Диалоги.')
+        collector.set_book_genre('Диалоги.', 'Фантастика')
+        assert collector.get_book_genre('Диалоги.') == 'Фантастика'
+
 
 
 
